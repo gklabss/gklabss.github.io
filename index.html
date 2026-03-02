@@ -2,68 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gaurav Kumar | Test Site</title>
+    <title>Gaurav Kumar | Student Developer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <style>
+        /* --- Global Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #1f2937, #111827);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
         }
+        a { text-decoration: none; color: inherit; }
 
+        /* --- Container --- */
         .container {
+            max-width: 900px;
+            margin: auto;
             padding: 20px;
         }
 
-        h1 {
-            font-size: 2rem;
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+        header h1 {
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
-
-        p {
+        header p {
+            font-size: 1.2rem;
             opacity: 0.8;
-            margin-bottom: 20px;
         }
 
-        .button {
+        /* --- Section Titles --- */
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3b82f6;
             display: inline-block;
-            padding: 12px 20px;
-            background: #3b82f6;
-            color: white;
-            text-decoration: none;
+            padding-bottom: 5px;
+        }
+
+        /* --- About Section --- */
+        .about, .skills, .contact {
+            margin: 40px 0;
+        }
+
+        /* --- Skills --- */
+        .skills ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .skills li {
+            background: #374151;
+            margin-bottom: 10px;
+            padding: 10px 15px;
             border-radius: 8px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* --- Contact --- */
+        .contact p {
+            margin-bottom: 10px;
+        }
+        .contact button {
+            padding: 10px 20px;
+            background: #3b82f6;
+            border: none;
+            border-radius: 8px;
+            color: white;
             font-weight: bold;
+            cursor: pointer;
             transition: 0.3s ease;
         }
-
-        .button:hover {
+        .contact button:hover {
             background: #2563eb;
         }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
             opacity: 0.6;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1rem; }
+            .skills li { display: block; margin-right: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Hello 👋</h1>
-        <p>This is my first live GitHub Pages test site.</p>
-        <a href="#" class="button">It Works!</a>
-        <div class="footer">
-            Built by jibu
-        </div>
+
+        <!-- Header -->
+        <header>
+            <h1>Gaurav Kumar</h1>
+            <p>Student Developer</p>
+        </header>
+
+        <!-- About Section -->
+        <section class="about">
+            <h2>About Me</h2>
+            <p>I am a solo student developer, a master of vibe coding, and also code in Python if you want a website with a backend. I am 12 years old. My hobby is computer science.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>Python</li>
+                <li>n8n.automation</li>
+                <li>General programming (with AI, can code in any language)</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <h2>Contact</h2>
+            <p>Email: <span id="email">contactgauravkumar12@gmail.com</span></p>
+            <button onclick="copyEmail()">Copy Email</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            Built by Gaurav Kumar
+        </footer>
+
     </div>
+
+    <script>
+        function copyEmail() {
+            const email = document.getElementById('email').innerText;
+            navigator.clipboard.writeText(email).then(() => {
+                alert('Email copied to clipboard!');
+            }).catch(() => {
+                alert('Failed to copy email.');
+            });
+        }
+    </script>
 
 </body>
 </html>

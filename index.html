@@ -1,154 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Gaurav Kumar | Student Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* --- Global Styles --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1f2937, #111827);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        a { text-decoration: none; color: inherit; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaurav Kumar - Student Developer</title>
 
-        /* --- Container --- */
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* --- Header --- */
-        header {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #222);
+  color: #f0f0f0;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
 
-        /* --- Section Titles --- */
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #3b82f6;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+}
 
-        /* --- About Section --- */
-        .about, .skills, .contact {
-            margin: 40px 0;
-        }
+section {
+  padding: 4rem 0;
+  transition: filter 0.25s ease-out;
+  will-change: filter;
+}
 
-        /* --- Skills --- */
-        .skills ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .skills li {
-            background: #374151;
-            margin-bottom: 10px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-right: 10px;
-        }
+/* Header */
+header {
+  text-align: center;
+  padding: 4rem 0;
+}
 
-        /* --- Contact --- */
-        .contact p {
-            margin-bottom: 10px;
-        }
-        .contact button {
-            padding: 10px 20px;
-            background: #3b82f6;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .contact button:hover {
-            background: #2563eb;
-        }
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
 
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
+header h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ccc;
+}
 
-        /* --- Responsive --- */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            header p { font-size: 1rem; }
-            .skills li { display: block; margin-right: 0; }
-        }
-    </style>
+/* About */
+#about p {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+/* Skills */
+#skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: #2a2a2a;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+}
+
+/* Contact */
+#contact {
+  text-align: center;
+}
+
+#contact p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+.email-container {
+  display: inline-flex;
+  align-items: center;
+  background: #2a2a2a;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.email-container button {
+  margin-left: 1rem;
+  background: #444;
+  border: none;
+  color: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.email-container button:hover {
+  background: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Responsive */
+@media(max-width:768px) {
+  header h1 { font-size:2.5rem; }
+  header h2 { font-size:1.2rem; }
+  .skill-card { min-width:140px; }
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="container">
+<header class="dynamic">
+  <h1>Gaurav Kumar</h1>
+  <h2>Student Developer</h2>
+</header>
 
-        <!-- Header -->
-        <header>
-            <h1>Gaurav Kumar</h1>
-            <p>Student Developer</p>
-        </header>
+<section id="about" class="dynamic">
+  <div class="container">
+    <p>
+      I am a solo student developer, a master of vibe coding, and also code in Python if you want a website with a backend. I am 12 years old. My hobby is computer science.
+    </p>
+  </div>
+</section>
 
-        <!-- About Section -->
-        <section class="about">
-            <h2>About Me</h2>
-            <p>I am a solo student developer, a master of vibe coding, and also code in Python if you want a website with a backend. I am 12 years old. My hobby is computer science.</p>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills">
-            <h2>Skills</h2>
-            <ul>
-                <li>Python</li>
-                <li>n8n.automation</li>
-                <li>General programming (with AI, can code in any language)</li>
-            </ul>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact">
-            <h2>Contact</h2>
-            <p>Email: <span id="email">contactgauravkumar12@gmail.com</span></p>
-            <button onclick="copyEmail()">Copy Email</button>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            Built by Gaurav Kumar
-        </footer>
-
+<section id="skills-section" class="dynamic">
+  <div class="container">
+    <h2 style="text-align:center; margin-bottom:2rem;">Skills</h2>
+    <div id="skills">
+      <div class="skill-card">Python</div>
+      <div class="skill-card">n8n.automation</div>
+      <div class="skill-card">General programming (with AI)</div>
     </div>
+  </div>
+</section>
 
-    <script>
-        function copyEmail() {
-            const email = document.getElementById('email').innerText;
-            navigator.clipboard.writeText(email).then(() => {
-                alert('Email copied to clipboard!');
-            }).catch(() => {
-                alert('Failed to copy email.');
-            });
-        }
-    </script>
+<section id="contact" class="dynamic">
+  <div class="container">
+    <h2>Contact Me</h2>
+    <p>Reach out to discuss web projects, automation, or coding collaborations.</p>
+    <div class="email-container">
+      <span id="email-text">contactgauravkumar12@gmail.com</span>
+      <button id="copy-btn">Copy</button>
+    </div>
+  </div>
+</section>
+
+<footer class="dynamic">
+  Built by Gaurav Kumar
+</footer>
+
+<script>
+/* Copy Email */
+const copyBtn = document.getElementById('copy-btn');
+const emailText = document.getElementById('email-text').textContent;
+
+copyBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(emailText).then(() => {
+    const original = copyBtn.textContent;
+    copyBtn.textContent = 'Copied!';
+    setTimeout(() => copyBtn.textContent = original, 1500);
+  });
+});
+
+/* Improved Edge Brightness System */
+const sections = document.querySelectorAll('.dynamic');
+
+function updateBrightness() {
+  const vh = window.innerHeight;
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const visiblePortion = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+
+    let visibilityRatio = visiblePortion / rect.height;
+
+    visibilityRatio = Math.max(0, Math.min(1, visibilityRatio));
+
+    /* Non-linear curve for faster darken/brighten but less sensitive */
+    let brightness = 0.3 + Math.pow(visibilityRatio, 2) * 0.7;
+
+    section.style.filter = `brightness(${brightness})`;
+  });
+}
+
+window.addEventListener('scroll', updateBrightness);
+window.addEventListener('resize', updateBrightness);
+window.addEventListener('load', updateBrightness);
+</script>
 
 </body>
 </html>

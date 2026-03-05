@@ -3,214 +3,845 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaurav Kumar - Student Developer</title>
+<title>Gaurav Kumar — Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --accent: #00ffc8;
+  --accent2: #ff6b35;
+  --bg: #060610;
+  --surface: #0e0e1e;
+  --surface2: #181830;
+  --text: #e8e8f0;
+  --muted: #7070a0;
+  --border: rgba(0,255,200,0.12);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #1a1a1a, #222);
-  color: #f0f0f0;
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,200,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,200,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(6,6,16,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  z-index: 1;
+}
+
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.hero-tag span {
+  display: inline-block;
+  background: rgba(0,255,200,0.08);
+  border: 1px solid var(--border);
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+}
+
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 15vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.4s forwards;
+}
+
+.hero-name .line1 { display: block; color: var(--text); }
+.hero-name .line2 {
+  display: block;
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+}
+
+.hero-sub {
+  margin-top: 2rem;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 480px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.6s forwards;
+}
+
+.hero-sub strong { color: var(--accent); font-weight: 400; }
+
+.hero-cta {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.8s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #00e6b3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,255,200,0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 1.2s forwards;
+}
+
+.scroll-hint span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 1.8s ease-in-out infinite;
+}
+
+/* ── SECTION BASE ── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 0;
 }
 
 .container {
   max-width: 1000px;
   margin: auto;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
-section {
-  padding: 4rem 0;
-  transition: filter 0.25s ease-out;
-  will-change: filter;
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
 }
 
-/* Header */
-header {
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  margin-bottom: 3rem;
+}
+
+/* ── ABOUT ── */
+#about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+#about .about-text p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+#about .about-text p + p { margin-top: 1rem; }
+
+#about .about-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
   text-align: center;
-  padding: 4rem 0;
+  transition: border-color 0.3s, transform 0.3s;
 }
 
-header h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+.stat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
 }
 
-header h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #ccc;
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: var(--accent);
+  line-height: 1;
 }
 
-/* About */
-#about p {
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
-  font-size: 1.1rem;
-  color: #ddd;
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
 }
 
-/* Skills */
-#skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
+/* ── SKILLS ── */
+#skills { background: var(--surface); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 .skill-card {
-  background: #2a2a2a;
-  padding: 1.5rem 2rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 180px;
-  text-align: center;
+  padding: 1.8rem 1.5rem;
+  cursor: default;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,200,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .skill-card:hover {
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,255,200,0.1);
 }
 
-/* Contact */
-#contact {
-  text-align: center;
-}
+.skill-card:hover::before { opacity: 1; }
 
-#contact p {
-  font-size: 1.1rem;
+.skill-icon {
+  font-size: 2rem;
   margin-bottom: 1rem;
-  color: #ccc;
+  display: block;
 }
 
-.email-container {
-  display: inline-flex;
+.skill-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.skill-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  font-weight: 300;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.35s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+
+.project-card:hover {
+  border-color: rgba(0,255,200,0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.project-card:hover::after { transform: scaleX(1); }
+
+.project-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(0,255,200,0.08);
+  border: 1px solid rgba(0,255,200,0.2);
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.project-stack {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.stack-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  background: var(--surface2);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+
+/* ── CONTACT ── */
+#contact { background: var(--surface); }
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
-  background: #2a2a2a;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
-.email-container button {
-  margin-left: 1rem;
-  background: #444;
-  border: none;
-  color: #f0f0f0;
+.contact-text p {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  transition: border-color 0.3s;
+}
+
+.contact-email:hover { border-color: var(--accent); }
+
+.contact-email span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+  flex: 1;
+}
+
+.copy-btn {
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s;
+  white-space: nowrap;
 }
 
-.email-container button:hover {
-  background: #555;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+.copy-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
 
-/* Footer */
-footer {
+.contact-deco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deco-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.deco-circle::before {
+  content: '';
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0,255,200,0.15);
+  animation: spin 20s linear infinite;
+}
+
+.deco-circle::after {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,200,0.08), transparent 70%);
+}
+
+.deco-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
   text-align: center;
-  padding: 1.5rem 0;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.5);
+  line-height: 1.1;
+  z-index: 1;
 }
 
-/* Responsive */
-@media(max-width:768px) {
-  header h1 { font-size:2.5rem; }
-  header h2 { font-size:1.2rem; }
-  .skill-card { min-width:140px; }
+.deco-text span { display: block; color: var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  z-index: 1;
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
 }
 
+footer p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+footer span { color: var(--accent); }
+
+/* ── DIVIDER ── */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-bottom: 1.5rem;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+
+  #about .about-grid,
+  .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .contact-deco { display: none; }
+}
+
+@media (max-width: 480px) {
+  .nav-links { display: none; }
+}
 </style>
 </head>
 
 <body>
 
-<header class="dynamic">
-  <h1>Gaurav Kumar</h1>
-  <h2>Student Developer</h2>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<section id="about" class="dynamic">
-  <div class="container">
-    <p>
-      I am a solo student developer, a master of vibe coding, and also code in Python if you want a website with a backend. I am 12 years old. My hobby is computer science.
-    </p>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag"><span>✦ Open to projects &amp; collabs</span></div>
+  <h1 class="hero-name">
+    <span class="line1">Gaurav</span>
+    <span class="line2">Kumar</span>
+  </h1>
+  <p class="hero-sub">
+    Student developer. <strong>12 years old.</strong> Building real things with Python, automation, and a whole lot of curiosity.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View My Work →</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<section id="skills-section" class="dynamic">
+<!-- ABOUT -->
+<section id="about" class="section">
   <div class="container">
-    <h2 style="text-align:center; margin-bottom:2rem;">Skills</h2>
-    <div id="skills">
-      <div class="skill-card">Python</div>
-      <div class="skill-card">n8n.automation</div>
-      <div class="skill-card">General programming (with AI)</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About me</p>
+        <h2 class="section-title">Building things<br>since day one.</h2>
+        <div class="divider"></div>
+        <p>
+          I'm <strong>Gaurav</strong> — a 12-year-old solo developer who's completely obsessed with building stuff on computers. I started with Python and haven't looked back since.
+        </p>
+        <p>
+          I specialise in <strong>vibe coding</strong> — that mix of intuition, flow, and fast iteration that gets things shipped. I also build automations with <strong>n8n</strong> and can wire up a full backend when needed.
+        </p>
+      </div>
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Years Old</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Curiosity</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Solo Built</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact" class="dynamic">
+<!-- SKILLS -->
+<section id="skills" class="section">
   <div class="container">
-    <h2>Contact Me</h2>
-    <p>Reach out to discuss web projects, automation, or coding collaborations.</p>
-    <div class="email-container">
-      <span id="email-text">contactgauravkumar12@gmail.com</span>
-      <button id="copy-btn">Copy</button>
+    <p class="section-label reveal">What I work with</p>
+    <h2 class="section-title reveal">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-icon">🐍</span>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Scripts, backends, bots — Python is my home base.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon">⚡</span>
+        <div class="skill-name">n8n Automation</div>
+        <div class="skill-desc">Workflows that connect apps and do the boring stuff for you.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon">🌐</span>
+        <div class="skill-name">Web Dev</div>
+        <div class="skill-desc">HTML, CSS, JS — front to back with vibe coding energy.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-icon">🤖</span>
+        <div class="skill-name">AI-Assisted Dev</div>
+        <div class="skill-desc">Leveraging AI tools to build faster and smarter.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="dynamic">
-  Built by Gaurav Kumar
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <p class="section-label reveal">Things I've built</p>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-tag">Automation</div>
+        <h3 class="project-title">n8n Workflow Bot</h3>
+        <p class="project-desc">An automated pipeline that connects multiple apps, handles triggers, and removes repetitive manual work entirely.</p>
+        <div class="project-stack">
+          <span class="stack-pill">n8n</span>
+          <span class="stack-pill">REST APIs</span>
+          <span class="stack-pill">JSON</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-tag">Python</div>
+        <h3 class="project-title">Python Scripts</h3>
+        <p class="project-desc">A collection of utility scripts for automating tasks, file management, and web scraping experiments.</p>
+        <div class="project-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">CLI</span>
+          <span class="stack-pill">requests</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-tag">Web</div>
+        <h3 class="project-title">This Portfolio</h3>
+        <p class="project-desc">Built from scratch with pure HTML, CSS, and JS. Designed for speed, style, and personality.</p>
+        <div class="project-stack">
+          <span class="stack-pill">HTML</span>
+          <span class="stack-pill">CSS</span>
+          <span class="stack-pill">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text reveal">
+        <p class="section-label">Get in touch</p>
+        <h2 class="section-title">Let's work<br>together.</h2>
+        <div class="divider"></div>
+        <p>Got a project idea, want to collaborate, or just want to say hello? My inbox is always open.</p>
+        <div class="contact-email">
+          <span id="email-text">contactgauravkumar12@gmail.com</span>
+          <button class="copy-btn" id="copy-btn">Copy</button>
+        </div>
+        <div class="contact-email" style="margin-top:0.75rem;">
+          <span id="phone-text">+91 82501 78846</span>
+          <button class="copy-btn" id="copy-phone-btn">Copy</button>
+        </div>
+      </div>
+      <div class="contact-deco reveal">
+        <div class="deco-circle">
+          <div class="deco-text">
+            Say<br><span>Hello</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built with ♥ by <span>Gaurav Kumar</span> — 2026</p>
 </footer>
 
 <script>
-/* Copy Email */
-const copyBtn = document.getElementById('copy-btn');
-const emailText = document.getElementById('email-text').textContent;
-
-copyBtn.addEventListener('click', () => {
-  navigator.clipboard.writeText(emailText).then(() => {
-    const original = copyBtn.textContent;
-    copyBtn.textContent = 'Copied!';
-    setTimeout(() => copyBtn.textContent = original, 1500);
-  });
-});
-
-/* Improved Edge Brightness System */
-const sections = document.querySelectorAll('.dynamic');
-
-function updateBrightness() {
-  const vh = window.innerHeight;
-
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    const visiblePortion = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
-
-    let visibilityRatio = visiblePortion / rect.height;
-
-    visibilityRatio = Math.max(0, Math.min(1, visibilityRatio));
-
-    /* Non-linear curve for faster darken/brighten but less sensitive */
-    let brightness = 0.3 + Math.pow(visibilityRatio, 2) * 0.7;
-
-    section.style.filter = `brightness(${brightness})`;
+// Copy helper
+function makeCopyBtn(btnId, textId) {
+  const btn = document.getElementById(btnId);
+  const text = document.getElementById(textId).textContent;
+  btn.addEventListener('click', () => {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      btn.style.background = 'var(--accent)';
+      btn.style.color = 'var(--bg)';
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1800);
+    });
   });
 }
+makeCopyBtn('copy-btn', 'email-text');
+makeCopyBtn('copy-phone-btn', 'phone-text');
 
-window.addEventListener('scroll', updateBrightness);
-window.addEventListener('resize', updateBrightness);
-window.addEventListener('load', updateBrightness);
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
